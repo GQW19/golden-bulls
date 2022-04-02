@@ -17,6 +17,15 @@ const Home = () => {
       console.log(error.message);
     }
   };
+  const handleToClasses = async () => {
+    try {
+      navigate("/Classes");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+
   return (
     <>
       <div className="p-4 box mt-3 text-center">
@@ -28,6 +37,19 @@ const Home = () => {
           Log out
         </Button>
       </div>
+
+      <div className="d-grid gap-2">
+      <Button variant="btn btn-success" onClick={handleToClasses}>View available courses</Button>
+      </div>
+
+      <div className="d-grid gap-2">
+      <Button variant="btn btn-success" onClick={handleToClasses}>View Chat</Button>
+      </div>
+
+      <div className="d-grid gap-2">
+      <Button variant="btn btn-success" onClick={handleToClasses}>Schedule appointment</Button>
+      </div>
+      
     </>
   );
 };
