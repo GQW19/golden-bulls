@@ -2,8 +2,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
+import HomeCaseWorker from "./components/HomeCaseWorker";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Classes from "./components/Classes";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { UserAuthContextProvider } from "./UserAuthContext";
 /**
@@ -17,11 +19,20 @@ function App() {
         <Col>
           <UserAuthContextProvider>
             <Routes>
+              <Route path="/classes" element={<Classes />} />
               <Route
                 path="/home"
                 element={
                   <ProtectedRoute>
                     <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/HomeCaseWorker"
+                element={
+                  <ProtectedRoute>
+                    <HomeCaseWorker />
                   </ProtectedRoute>
                 }
               />
