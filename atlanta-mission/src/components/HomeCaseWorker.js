@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../UserAuthContext"
@@ -8,8 +8,11 @@ import { db } from "../firebase";
 import { render } from "@testing-library/react";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card'
-
-
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
+import Nav from 'react-bootstrap/Nav'
+import { async } from "@firebase/util";
+import Alert from 'react-bootstrap/Alert'
 
 
 
@@ -77,6 +80,23 @@ const HomeCaseWorker = () => {
     }
   };
 
+  function AlertDismissibleExample() {
+    const [show, setShow] = useState(true);
+  
+    if (show) {
+      return (
+        <Alert variant="success" onClose={() => setShow(false)} dismissible>
+          <Alert.Heading>Message From: John Smith</Alert.Heading>
+          <p>
+            Hey I really enjoyed that Financial Literacy course. Do you have any other additional recommendations?
+          </p>
+        </Alert>
+      );
+    }
+    
+  }
+
+//This function displays the current clients of the Caseworker
   function displayClients(){
         const clientNames = ["John Smith","Jane Doe"];
 
@@ -92,7 +112,17 @@ const HomeCaseWorker = () => {
     <Card.Text>
       Learning Budgeting, house/apartment hunting, Emotional support
     </Card.Text>
-    <Button variant="success">Send Message</Button>{' '}<Button variant="success">Recommend course</Button>{' '}<Button variant="success">Schedule Appointment</Button>{' '}
+    <Dropdown>
+  <Dropdown.Toggle variant="success" id="dropdown-basic">
+    Click to take Action
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="#/action-1">Send Message</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Recommend course</Dropdown.Item>
+    <Dropdown.Item href="#/action-3">Schedule Appointment</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
   </Card.Body>
 </Card>
 </div>
@@ -112,31 +142,61 @@ const HomeCaseWorker = () => {
       );
   }
  
+function MenuHandle(x){
+    const selction = x.selectedKey;
+
+    //conditional functionality of menu
+    if(selction=="1"){
+        render(<AlertDismissibleExample />);
+        console.log("1");
+    }else if(selction=="2"){
+        console.log("2");
+        handleToClasses();
+    }else if(selction=="3"){
+        console.log("3");
+        handleLogout()
+    }else{
+        console.log("Bad Data");
+    }
+}
   
   return (
     <>
+    <>
+    <Nav
+  variant="pills" 
+  activeKey="3"
+  onSelect= {(selectedKey) => MenuHandle({selectedKey})}
+>
+  <Nav.Item >
+    <Nav.Link eventKey="1" >Get Messages</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link eventKey="2">Courses</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link eventKey="3">Log out</Nav.Link>
+  </Nav.Item>
+</Nav>
+    </>
+
      <div className="p-4 box mt-3 text-center">
         Welcome To The Case Worker Landing Page <br />
         {user && user.email}
       </div>
-      <div className="d-grid gap-2">
-        <Button variant="primary" onClick={handleLogout}>
-          Log out
-        </Button>
-      </div>
-        <br></br>
-      <div className="d-grid gap-2">
-      <Button variant="btn btn-success" onClick={handleToClasses}>View available courses</Button>
-      </div>
-
+    
         <br></br> <br></br>
 
         <h3>Current Mission clients for {userEmail}</h3>
-        
-       <>
+        <div className="d-grid gap-2">
+        <>
        
        {displayClients()}
        </>
+
+
+      </div>
+      
 
      
 
