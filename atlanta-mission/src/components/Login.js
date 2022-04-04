@@ -85,7 +85,7 @@ const Login = () => {
         <p>1) Mission Client: Create a new account or sign in as</p>
         <p>user: testClient@gmail.com</p>
         <p>pass: password</p>
-        <br></br>
+        
         <hr></hr>
         <p>1) Mission Case Worker: sign in as</p>
         <p>user: danieljeffcarlson@gmail.com</p>
