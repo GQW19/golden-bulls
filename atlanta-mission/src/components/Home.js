@@ -65,7 +65,7 @@ const Home = () => {
         <p>Healthy Relationships</p>
         <ProgressBar striped variant="warning" now={60} label={"60%"} animated={true}/>
         <hr></hr>
-        <p>1</p>
+        <p>Dealing With Fear</p>
         <ProgressBar striped variant="danger" now={80} label={"80%"} animated={true}/>
         <hr></hr>
       </div>

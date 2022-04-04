@@ -7,7 +7,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { render } from "@testing-library/react";
 import ListGroup from 'react-bootstrap/ListGroup';
-
+import Card from 'react-bootstrap/Card'
 
 
 
@@ -82,8 +82,20 @@ const HomeCaseWorker = () => {
 
         // Generate JSX code for Display each item
         const RenderClients = clientNames.map((Client, index) => 
-        <div key={index}><ListGroup.Item>{Client}</ListGroup.Item><Button variant="success">Send Message</Button>{' '}<Button variant="success">Recommend course</Button>{' '}</div>
-     
+        
+
+        <div key={index}>
+        <Card style={{ width: '18rem' }}>
+  <Card.Body>
+    <Card.Title>{Client}</Card.Title>
+    <Card.Subtitle className="mb-2 text-muted">Client Interests</Card.Subtitle>
+    <Card.Text>
+      Learning Budgeting, house/apartment hunting, Emotional support
+    </Card.Text>
+    <Button variant="success">Send Message</Button>{' '}<Button variant="success">Recommend course</Button>{' '}<Button variant="success">Schedule Appointment</Button>{' '}
+  </Card.Body>
+</Card>
+</div>
         );
       
       return(
