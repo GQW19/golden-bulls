@@ -15,6 +15,8 @@ import Card from 'react-bootstrap/Card'
 const Home = () => {
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
+
+  //log out function
   const handleLogout = async () => {
     try {
       await logOut();
@@ -23,6 +25,8 @@ const Home = () => {
       console.log(error.message);
     }
   };
+
+  //navigate to class
   const handleToClasses = async () => {
     try {
       navigate("/Classes");
@@ -81,7 +85,7 @@ const Home = () => {
     <Nav.Link eventKey="1">Get Messages</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-    <Nav.Link eventKey="2">Courses</Nav.Link>
+    <Nav.Link eventKey="2">View Courses</Nav.Link>
   </Nav.Item>
   <Nav.Item>
     <Nav.Link eventKey="3">Log out</Nav.Link>
@@ -91,10 +95,10 @@ const Home = () => {
 
 
       <div className="p-4 box mt-3 text-center">
-        Welcome To The Client Landing Page <br />
+        <h2>Welcome To The Client Landing Page</h2> <br />
         {user && user.email}
       </div>
-      <>
+      <div className="p-4 box mt-3 text-center">
       <Card style={{ width: '18rem' }}>
   <Card.Body>
     <Card.Title>Current Case Worker</Card.Title>
@@ -114,7 +118,7 @@ const Home = () => {
 </Dropdown>
   </Card.Body>
 </Card>   
-</>
+</div>
 <br></br><br></br>
 <><h3>My Course Statuses</h3></>
 <br></br><br></br>
