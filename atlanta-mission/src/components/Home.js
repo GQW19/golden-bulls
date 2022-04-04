@@ -119,9 +119,9 @@ const Home = () => {
   </Card.Body>
 </Card>   
 </div>
-<br></br><br></br>
+<hr></hr>
 <><h3>My Course Statuses</h3></>
-<br></br><br></br>
+<br></br>
       <div>
         <hr></hr>
         <p>Financial Literacy</p>
