@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <>
       <div className="p-4 box mt-3 text-center">
-        Hello Welcome <br />
+        Welcome To The Client Landing Page <br />
         {user && user.email}
       </div>
       <div className="d-grid gap-2">
