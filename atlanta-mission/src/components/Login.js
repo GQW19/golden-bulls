@@ -80,6 +80,17 @@ const Login = () => {
     <>
       <div className="p-4 box">
         <h2 className="mb-3">Helping Hand Login</h2>
+        <p>*** Note this is an application that has 2 differnt user groups</p>
+        <hr></hr>
+        <p>1) Mission Client: Create a new account or sign in as</p>
+        <p>user: testClient@gmail.com</p>
+        <p>pass: password</p>
+        <br></br>
+        <hr></hr>
+        <p>1) Mission Case Worker: sign in as</p>
+        <p>user: danieljeffcarlson@gmail.com</p>
+        <p>pass: password</p>
+        <hr></hr>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
