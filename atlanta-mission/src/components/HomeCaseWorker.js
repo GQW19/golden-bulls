@@ -100,7 +100,7 @@ const HomeCaseWorker = () => {
       
       return(
         <div className="app">
-        <div>The List contains:</div>
+        
         <br></br>
         <div>
         <ListGroup>
