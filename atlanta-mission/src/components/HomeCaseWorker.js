@@ -172,7 +172,7 @@ function MenuHandle(x){
     <Nav.Link eventKey="1" >Get Messages</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-    <Nav.Link eventKey="2">Courses</Nav.Link>
+    <Nav.Link eventKey="2">View Courses</Nav.Link>
   </Nav.Item>
   <Nav.Item>
     <Nav.Link eventKey="3">Log out</Nav.Link>
@@ -181,14 +181,16 @@ function MenuHandle(x){
     </>
 
      <div className="p-4 box mt-3 text-center">
-        Welcome To The Case Worker Landing Page <br />
+        <h2>Welcome To The Case Worker Landing Page</h2> <br />
         {user && user.email}
       </div>
     
         <br></br> <br></br>
-
-        <h3>Current Mission clients for {userEmail}</h3>
-        <div className="d-grid gap-2">
+        
+        <h3>Current Mission Clients</h3>
+        
+        
+        <div className="p-4 box mt-3 text-center">
         <>
        
        {displayClients()}
