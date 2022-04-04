@@ -38,7 +38,7 @@ const Login = () => {
       //here we are instancing the collection and then querying the collection to get a row where uid ==s the uid of the currently signed in user
       const CaseWorkers = collection(db, "Usergroup");
       const q = query(CaseWorkers, where("UID", "==", user.uid));
-      //console.log(q);
+     
       //actually executing the query and getting
       const querySnapshot = await getDocs(q);
       const result = []

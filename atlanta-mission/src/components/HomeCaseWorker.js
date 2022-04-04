@@ -1,14 +1,38 @@
-import React from "react";
+import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../UserAuthContext"
+import { getAuth, SignInMethod} from "firebase/auth";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+import { render } from "@testing-library/react";
+import ListGroup from 'react-bootstrap/ListGroup';
+import Card from 'react-bootstrap/Card'
+
+
+
+
+
+
+
 /**
  * 
  * @author : Daniel Carlson
  */
-const Home = () => {
+
+class App extends React.Component{
+    state = {clients:null}
+}
+
+const HomeCaseWorker = () => {
+
+
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
+
+  const userEmail = user.email
+
+  //This is a function that will log the user our from fire base and move them back to the root login page.
   const handleLogout = async () => {
     try {
       await logOut();
@@ -18,16 +42,106 @@ const Home = () => {
     }
   };
  
+  //This function moves to the course selection/view page
+  const handleToClasses = async () => {
+    try {
+      navigate("/Classes");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
+//This function is pulling associated clients for the specfic caseworker amd returning as list
+  const ShowAssociatedClients = async () => {
+    try {
+   
+    const q = query(collection(db, "ClientAssignments"), where("associatedCaseWorkerID", "==","TiEBGx1grgPef0BXO5imIR0mJTj2" ));
+    const querySnapshot = await getDocs(q);
 
+    const clients = []
+
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        //clients.push(doc.data().clientEmail);
+        render( 
+            <>
+            <p>{doc.data().clientEmail}</p>
+            </>);
+      });
+
+      
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  function displayClients(){
+        const clientNames = ["John Smith","Jane Doe"];
+
+        // Generate JSX code for Display each item
+        const RenderClients = clientNames.map((Client, index) => 
+        
+
+        <div key={index}>
+        <Card style={{ width: '18rem' }}>
+  <Card.Body>
+    <Card.Title>{Client}</Card.Title>
+    <Card.Subtitle className="mb-2 text-muted">Client Interests</Card.Subtitle>
+    <Card.Text>
+      Learning Budgeting, house/apartment hunting, Emotional support
+    </Card.Text>
+    <Button variant="success">Send Message</Button>{' '}<Button variant="success">Recommend course</Button>{' '}<Button variant="success">Schedule Appointment</Button>{' '}
+  </Card.Body>
+</Card>
+</div>
+        );
+      
+      return(
+        <div className="app">
+        
+        <br></br>
+        <div>
+        <ListGroup>
+        {RenderClients} 
+        </ListGroup>
+        </div>
+      
+    </div>
+      );
+  }
+ 
+  
   return (
     <>
-      <div>
-          <h1>Hello Case Worker !!!</h1>
+     <div className="p-4 box mt-3 text-center">
+        Welcome To The Case Worker Landing Page <br />
+        {user && user.email}
       </div>
-      
+      <div className="d-grid gap-2">
+        <Button variant="primary" onClick={handleLogout}>
+          Log out
+        </Button>
+      </div>
+        <br></br>
+      <div className="d-grid gap-2">
+      <Button variant="btn btn-success" onClick={handleToClasses}>View available courses</Button>
+      </div>
+
+        <br></br> <br></br>
+
+        <h3>Current Mission clients for {userEmail}</h3>
+        
+       <>
+       
+       {displayClients()}
+       </>
+
+     
+
     </>
   );
 };
 
-export default Home;
+export default HomeCaseWorker;
