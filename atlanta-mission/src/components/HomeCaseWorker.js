@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../UserAuthContext"
-import { getAuth} from "firebase/auth";
+import { getAuth, SignInMethod} from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
-import { type } from "@testing-library/user-event/dist/type";
 import { render } from "@testing-library/react";
-import React, { Component, Fragment } from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
-Component
+
+
+
+
 
 
 /**
@@ -27,6 +29,8 @@ const HomeCaseWorker = () => {
 
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
+
+  const userEmail = user.email
 
   //This is a function that will log the user our from fire base and move them back to the root login page.
   const handleLogout = async () => {
@@ -50,26 +54,7 @@ const HomeCaseWorker = () => {
 //This function is pulling associated clients for the specfic caseworker amd returning as list
   const ShowAssociatedClients = async () => {
     try {
-    //   console.log("current userID: " ,user.uid);
-
-      
-    //   //instancing a collection of client-caseworker relationships and then writing a query to only pull clients associated with the current signed in cases workers ID
-    //   const ClientAssignments = collection(db, "ClientAssignments");
-    //   const q = query(ClientAssignments, where("associatedCaseWorkerID", "==", user.uid)); 
-      
-    //    //actually executing the query and getting
-    //    const querySnapshot = await getDocs(q);
-    //    const result = []
-    //    querySnapshot.forEach((doc) => {
-    //      // doc.data() is never undefined for query doc snapshots
-    //      result.push(doc.data().clientEmail);
-    //      });
-
-
-  
-    // const clientref = doc(db, "ClientAssignments", "7wDIDPl7hgovXQVxHz3G");
-    // const docSnap = await getDoc(clientref);
-
+   
     const q = query(collection(db, "ClientAssignments"), where("associatedCaseWorkerID", "==","TiEBGx1grgPef0BXO5imIR0mJTj2" ));
     const querySnapshot = await getDocs(q);
 
@@ -85,28 +70,36 @@ const HomeCaseWorker = () => {
             </>);
       });
 
-      render( 
-          <>
-          <p>{clients}</p>
-          </>)
-     
-
-        // return (
-        //     this.state.clients.map((client) => {
-        //         <>
-        //         <p>{client}</p>
-        //         </>
-        //     })
-        // );
+      
 
     } catch (error) {
       console.log(error.message);
     }
   };
 
+  function displayClients(){
+        const clientNames = ["John Smith","Jane Doe"];
+
+        // Generate JSX code for Display each item
+        const RenderClients = clientNames.map((Client, index) => 
+        <div key={index}><ListGroup.Item>{Client}</ListGroup.Item><Button variant="success">Send Message</Button>{' '}<Button variant="success">Recommend course</Button>{' '}</div>
+     
+        );
+      
+      return(
+        <div className="app">
+        <div>The List contains:</div>
+        <br></br>
+        <div>
+        <ListGroup>
+        {RenderClients} 
+        </ListGroup>
+        </div>
+      
+    </div>
+      );
+  }
  
-
-
   
   return (
     <>
@@ -124,14 +117,14 @@ const HomeCaseWorker = () => {
       <Button variant="btn btn-success" onClick={handleToClasses}>View available courses</Button>
       </div>
 
-      <div className="d-grid gap-2">
-      <Button variant="btn btn-success" onClick={ShowAssociatedClients}>run associated clients in console</Button>
-      </div>
-      <br></br>
+        <br></br> <br></br>
 
-        <h3>display data here</h3>
+        <h3>Current Mission clients for {userEmail}</h3>
         
+       <>
        
+       {displayClients()}
+       </>
 
      
 

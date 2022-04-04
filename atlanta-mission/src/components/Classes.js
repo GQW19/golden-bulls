@@ -41,12 +41,9 @@ import { useUserAuth } from "../UserAuthContext"
             <Button variant="btn btn-success" onClick={GetCourses}>Show classes in Log</Button>
         </div>
 
-/*        <div>
-        {GetCourses.map(data => (
-        <p>{data}</p>
-            ))}
-    </div>
-  */      
+
+       
+        
   );
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../UserAuthContext"
+import ProgressBar from 'react-bootstrap/ProgressBar';
 /**
  * 
  * @author : Chirag Dara 
@@ -50,6 +51,25 @@ const Home = () => {
       <Button variant="btn btn-success" onClick={handleToClasses}>Schedule appointment</Button>
       </div>
       
+<br></br><br></br><br></br><br></br>
+<><h3>Course Status</h3></>
+<br></br><br></br>
+      <div>
+        <hr></hr>
+        <p>Financial Literacy</p>
+        <ProgressBar striped variant="success" now={100} label={"100%"} animated={true} /><p align="center">&#x2B50; &#x2B50; &#x2B50; Completed &#x2B50; &#x2B50; &#x2B50;</p>
+        <hr></hr>
+        <p>Walk with Christ</p>
+        <ProgressBar striped variant="info" now={20} label={"20%"} animated={true}/>
+        <hr></hr>
+        <p>Healthy Relationships</p>
+        <ProgressBar striped variant="warning" now={60} label={"60%"} animated={true}/>
+        <hr></hr>
+        <p>1</p>
+        <ProgressBar striped variant="danger" now={80} label={"80%"} animated={true}/>
+        <hr></hr>
+      </div>
+
     </>
   );
 };
